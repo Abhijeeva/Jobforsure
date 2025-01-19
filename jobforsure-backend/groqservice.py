@@ -3,6 +3,11 @@ from groq import Groq
 from transformers import pipeline, AutoTokenizer, AutoModelForTokenClassification
 import json
 import re
+import random
+import datetime
+from datetime import timedelta
+from typing import Optional, List, Dict
+from datetime import date
 
 GROA_API_KEY = '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'
 
@@ -143,3 +148,123 @@ def process_groq_response(response):
     except json.JSONDecodeError as e:
         raise ValueError(f"Failed to parse JSON: {e}")
     
+
+
+
+# Function to generate dynamic tasks for a given skill
+def generate_dynamic_tasks(skill):
+    task_templates = [
+        f"Study how {skill} is applied in real-world scenarios.",
+        f"Implement a small project or example using {skill}.",
+        f"Identify common challenges and best practices for {skill}.",
+        f"Work on practical exercises related to {skill}.",
+        f"Review documentation and tutorials about {skill} to strengthen your understanding.",
+        f"Participate in discussions or forums to learn more about {skill}.",
+        f"Practice solving problems that involve {skill}.",
+        f"Learn about the foundational concepts of {skill}.",
+        f"Explore tools or libraries commonly associated with {skill}.",
+        f"Review and analyze case studies involving {skill}.",
+        f"Set up a development environment to practice {skill}.",
+        f"Create a cheat sheet summarizing key aspects of {skill}.",
+        f"Conduct a peer review of projects or exercises involving {skill}.",
+        f"Complete a guided tutorial focused on mastering {skill}.",
+        f"List and address common mistakes made while working with {skill}.",
+        f"Develop a checklist for using {skill} effectively in projects.",
+        f"Understand the history and evolution of {skill} in the tech industry.",
+        f"Document your learnings and insights while working on {skill}.",
+        f"Compare {skill} with other similar tools, concepts, or frameworks.",
+        f"Simulate a real-world problem and solve it using {skill}.",
+        f"Create a simple workflow or pipeline incorporating {skill}.",
+        f"Explore advanced features or use cases of {skill}.",
+        f"Conduct research on emerging trends related to {skill}.",
+        f"Present a short summary or mini-presentation on {skill} to a peer or mentor.",
+        f"List key performance metrics to evaluate {skill} in practice.",
+        f"Participate in an online coding challenge or competition involving {skill}.",
+        f"Contribute to an open-source project that utilizes {skill}.",
+        f"Draft interview questions related to {skill} and answer them.",
+        f"Create and analyze test cases for scenarios involving {skill}.",
+        f"Experiment with integration or interoperability between {skill} and other tools."
+    ]
+    return random.sample(task_templates, 4)  # Select 4 unique tasks randomly
+
+
+import json
+from datetime import datetime, timedelta
+import random
+
+# Function to calculate score and generate preparation strategy
+def generate_analysis_and_strategy(questions: List[Dict], jd: str, interview_date: str):
+
+    score = 0
+    preparation_plan = []
+    today = datetime.today()
+    interview_date = datetime.strptime(interview_date, "%Y-%m-%d")
+
+    for i, question in enumerate(questions):
+        if question["isCorr"]:
+            score += 1
+        else:
+            # Weak skills handled inline within preparation strategy
+            weak_skill = question["question"]
+            preparation_plan.append({
+                "title": f"Focus on {weak_skill}",
+                "date": (today + timedelta(days=len(preparation_plan) + 1)).strftime("%Y-%m-%d"),
+                "tasks": [
+                    f"Study how {weak_skill} is applied in real-world scenarios.",
+                    f"Practice exercises specific to {weak_skill}.",
+                    f"Work on practical projects involving {weak_skill}.",
+                    f"Review advanced documentation and tutorials on {weak_skill}."
+                ]
+            })
+
+    # Return only the score and preparation strategy
+    return {
+        "preparation_strategy": preparation_plan
+    }
+
+
+    questions = [
+        {
+            "question": "What is the default database system used in Django?",
+            "options": ["MySQL", "PostgreSQL", "SQLite", "Oracle"],
+            "correct_answer": 3
+        },
+        {
+            "question": "Which of the following Azure services is used for deploying and managing applications?",
+            "options": ["Azure VM", "Azure App Service", "Azure Blob Storage", "Azure Functions"],
+            "correct_answer": 2
+        },
+        {
+            "question": "What is the primary use of the 'requests' library in Python?",
+            "options": ["To handle file I/O", "To send HTTP requests", "To manage databases", "To execute shell commands"],
+            "correct_answer": 2
+        },
+        {
+            "question": "In a Django project, what is the purpose of the 'settings.py' file?",
+            "options": ["To define database models", "To store project-wide settings", "To manage URLs", "To implement views"],
+            "correct_answer": 2
+        },
+        {
+            "question": "What is the purpose of Django's ORM (Object-Relational Mapping) system?",
+            "options": ["To manage HTTP requests", "To abstract database interactions", "To store static files", "To implement caching"],
+            "correct_answer": 2
+        },
+        {
+            "question": "In Django, what is the purpose of a 'middleware'?",
+            "options": ["To define database schema", "To manage templates", "To handle HTTP requests", "To send HTTP responses"],
+            "correct_answer": 3
+        }
+    ]
+
+    user_answers = [2, 3, 4, 1, 2, 3]  # Example user answers
+    interview_date = "2025-01-25"
+
+    try:
+        # Step 1: Generate analysis and strategy
+        result = generate_analysis_and_strategy(questions, user_answers, interview_date)
+
+        # Step 2: Print JSON response
+        print(json.dumps(result, indent=4))
+
+    except Exception as e:
+        print(json.dumps({"error": str(e)}, indent=4))

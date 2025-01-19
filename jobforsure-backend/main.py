@@ -1,11 +1,11 @@
-from fastapi import FastAPI, File, Form, UploadFile
+from fastapi import FastAPI, File, Form, UploadFile, HTTPException
 from pydantic import BaseModel
+from fastapi.middleware.cors import CORSMiddleware
 from datetime import date
-from typing import Optional
+from typing import Optional, List, Dict
 import fitz  # PyMuPDF for extracting text from PDFs
 import groqservice
 import json
-from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 # Configure CORS
@@ -54,3 +54,35 @@ async def submit_profile(
         
     except Exception as e:
         return {"error": str(e)}
+
+# Define Pydantic model for questions
+class Question(BaseModel):
+    question: str
+    isCorr: bool
+
+
+class CreatePlanRequest(BaseModel):
+    questions: List[Question]
+    jd: str
+    interview_date: str
+
+
+@app.post("/createPlan")
+async def create_plan(request: CreatePlanRequest):
+    print(request)
+    try:
+        print("Request:", request)
+        questions = [q.dict() for q in request.questions]
+        jd = request.jd
+        interview_date = request.interview_date
+        print("Questions:", questions, "JD:", jd, "Interview Date:", interview_date)
+
+        # # Call the Groq service to create a preparation strategy
+        return groqservice.generate_analysis_and_strategy(questions, jd, interview_date)
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+    
+# if __name__ == "__main__":
+#     import uvicorn
+#     uvicorn.run(app, host="127.0.0.1", port=8000)

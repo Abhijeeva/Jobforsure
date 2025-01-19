@@ -30,6 +30,9 @@ const Home: React.FC = () => {
         jobDescription,
         interviewDate
       );
+      // Store data in localStorage
+      localStorage.setItem("jobDescription", jobDescription);
+      localStorage.setItem("interviewDate", interviewDate);
       alert("Assessment started successfully!");
       router.push(
         `/questions?data=${encodeURIComponent(JSON.stringify(response))}`
@@ -78,10 +81,14 @@ const Home: React.FC = () => {
         {/* Assessment Form */}
         <div className={styles.formSection}>
           <form onSubmit={handleSubmit} className={styles.form}>
-            <h2 className={styles.formTitle}>Start Your Interview Preparation</h2>
-            
+            <h2 className={styles.formTitle}>
+              Start Your Interview Preparation
+            </h2>
+
             <div className={styles.formGroup}>
-              <label htmlFor="resume" className={styles.label}>Upload Resume</label>
+              <label htmlFor="resume" className={styles.label}>
+                Upload Resume
+              </label>
               <div className={styles.uploadBox}>
                 <input
                   type="file"
@@ -94,9 +101,11 @@ const Home: React.FC = () => {
                 />
                 <div className={styles.uploadContent}>
                   <p className={styles.uploadText}>
-                    {resume ? resume.name : 'Click to upload or drag and drop'}
+                    {resume ? resume.name : "Click to upload or drag and drop"}
                   </p>
-                  <p className={styles.uploadHint}>PDF, DOC, DOCX (MAX. 10MB)</p>
+                  <p className={styles.uploadHint}>
+                    PDF, DOC, DOCX (MAX. 10MB)
+                  </p>
                 </div>
               </div>
             </div>
@@ -128,7 +137,7 @@ const Home: React.FC = () => {
             </div>
 
             {error && <p className={styles.error}>{error}</p>}
-            
+
             <button type="submit" disabled={loading} className={styles.button}>
               {loading ? "Starting Assessment..." : "Start Assessment"}
             </button>
@@ -140,9 +149,12 @@ const Home: React.FC = () => {
           <h2 className={styles.sectionTitle}>Why Choose Us?</h2>
           <div className={styles.featuresList}>
             <div className={styles.featureItem}>
-              <h3 className={styles.featureTitle}>Personalized Learning Path</h3>
+              <h3 className={styles.featureTitle}>
+                Personalized Learning Path
+              </h3>
               <p className={styles.featureDescription}>
-                Get a customized preparation plan based on your resume and job description
+                Get a customized preparation plan based on your resume and job
+                description
               </p>
             </div>
             <div className={styles.featureItem}>

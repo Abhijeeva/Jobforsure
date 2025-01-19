@@ -11,12 +11,12 @@ import {
   LinearScale,
 } from "chart.js";
 import { Pie, Bar } from "react-chartjs-2";
-import dynamic from 'next/dynamic';
-import styles from '../css/personalizedPlan.module.css';
+import dynamic from "next/dynamic";
+import styles from "../css/personalizedPlan.module.css";
 
 // Dynamically import FullCalendar with no SSR
-const FullCalendar = dynamic(() => import('@fullcalendar/react'), {
-  ssr: false
+const FullCalendar = dynamic(() => import("@fullcalendar/react"), {
+  ssr: false,
 });
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
@@ -38,10 +38,10 @@ const PersonalizedPlan = () => {
       {
         data: [25, 20, 30, 25],
         backgroundColor: [
-          "rgba(24, 89, 255, 0.85)",  // Main blue
-          "rgba(24, 89, 255, 0.65)",  // Lighter blue
-          "rgba(24, 89, 255, 0.45)",  // Even lighter blue
-          "rgba(24, 89, 255, 0.25)",  // Lightest blue
+          "rgba(24, 89, 255, 0.85)", // Main blue
+          "rgba(24, 89, 255, 0.65)", // Lighter blue
+          "rgba(24, 89, 255, 0.45)", // Even lighter blue
+          "rgba(24, 89, 255, 0.25)", // Lightest blue
         ],
         borderWidth: 1,
         borderColor: "#ffffff",
@@ -78,10 +78,10 @@ const PersonalizedPlan = () => {
         padding: 12,
         cornerRadius: 8,
         callbacks: {
-          label: function(context) {
+          label: function (context) {
             return `Score: ${context.raw}%`;
-          }
-        }
+          },
+        },
       },
     },
     scales: {
@@ -93,9 +93,9 @@ const PersonalizedPlan = () => {
         },
         ticks: {
           color: "#6b7280",
-          callback: function(value) {
+          callback: function (value) {
             return value + "%";
-          }
+          },
         },
       },
       x: {
@@ -105,36 +105,36 @@ const PersonalizedPlan = () => {
         ticks: {
           color: "#6b7280",
           font: {
-            weight: '500'
-          }
+            weight: "500",
+          },
         },
       },
     },
   };
 
   const calendarEvents = [
-    { 
+    {
       title: "Study Java Basics",
       date: "2025-01-19",
       backgroundColor: "rgba(24, 89, 255, 0.85)",
       borderColor: "rgba(24, 89, 255, 0.85)",
       textColor: "#ffffff",
     },
-    { 
+    {
       title: "Practice SQL Queries",
       date: "2025-01-20",
       backgroundColor: "rgba(24, 89, 255, 0.85)",
       borderColor: "rgba(24, 89, 255, 0.85)",
       textColor: "#ffffff",
     },
-    { 
+    {
       title: "Python Advanced Topics",
       date: "2025-01-21",
       backgroundColor: "rgba(24, 89, 255, 0.85)",
       borderColor: "rgba(24, 89, 255, 0.85)",
       textColor: "#ffffff",
     },
-    { 
+    {
       title: "Mock Interview",
       date: "2025-01-22",
       backgroundColor: "rgba(24, 89, 255, 0.85)",
@@ -149,10 +149,10 @@ const PersonalizedPlan = () => {
         <div className={styles.header}>
           <h1>Your Personalized Plan</h1>
           <p>
-            Congratulations on completing the assessment! Based on your performance,
-            we've created a personalized plan to help you improve your skills and ace
-            your interviews. Below, you'll find a breakdown of your skills, your
-            scores, and a day-by-day study plan.
+            Congratulations on completing the assessment! Based on your
+            performance, we've created a personalized plan to help you improve
+            your skills and ace your interviews. Below, you'll find a breakdown
+            of your skills, your scores, and a day-by-day study plan.
           </p>
         </div>
 
@@ -185,26 +185,26 @@ const PersonalizedPlan = () => {
           <div className={styles.chartContainer}>
             <h2>Skill Distribution</h2>
             <div className={styles.chart}>
-              <Pie 
-                data={pieData} 
-                options={{ 
+              <Pie
+                data={pieData}
+                options={{
                   maintainAspectRatio: false,
                   plugins: {
                     legend: {
-                      position: 'top',
+                      position: "top",
                       labels: {
                         padding: 20,
                         font: {
-                          size: 12
-                        }
-                      }
-                    }
-                  }
-                }} 
+                          size: 12,
+                        },
+                      },
+                    },
+                  },
+                }}
               />
             </div>
           </div>
-          
+
           <div className={styles.chartContainer}>
             <h2>Skill Scores</h2>
             <div className={styles.chart}>

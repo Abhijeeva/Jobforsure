@@ -21,3 +21,32 @@ export const submitProfile = async (file, jobDescription, submissionDate) => {
     throw error;
   }
 };
+
+
+export const createPlan = async (questions, jobDescription, interviewDate) => {
+  const payload = {
+    questions,
+    jd: jobDescription,
+    interview_date: interviewDate,
+  };
+  console.log(payload)
+  try {
+    const response = await fetch("http://127.0.0.1:8000/createPlan", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Failed to create plan: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error creating plan:", error);
+    throw error;
+  }
+};
