@@ -1,76 +1,140 @@
-.container {
-    display: flex;
+.mainContainer {
+  min-height: 100vh;
+  background-color: #f5f5f5;
+  padding: 2rem 1rem;
+}
+
+.wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.header {
+  text-align: left;
+  margin-bottom: 1rem;
+}
+
+.header h1 {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.header p {
+  color: #666;
+  line-height: 1.6;
+  max-width: 800px;
+}
+
+.calendarSection {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.calendarSection h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 1.5rem;
+}
+
+.calendarWrapper {
+  height: 600px;
+  width: 100%;
+}
+
+.calendarWrapper :global(.fc) {
+  height: 100%;
+  font-family: inherit;
+}
+
+.calendarWrapper :global(.fc-toolbar-title) {
+  font-size: 1.2rem !important;
+  font-weight: 600;
+}
+
+.calendarWrapper :global(.fc-button) {
+  background-color: rgba(24, 89, 255, 0.85) !important;
+  border-color: rgba(24, 89, 255, 0.85) !important;
+}
+
+.calendarWrapper :global(.fc-button:hover) {
+  background-color: rgba(24, 89, 255, 1) !important;
+  border-color: rgba(24, 89, 255, 1) !important;
+}
+.calendarWrapper :global(.fc-button:active),
+.calendarWrapper :global(.fc-button:focus) {
+  box-shadow: 0 0 0 0.2rem rgba(24, 89, 255, 0.25) !important;
+}
+
+.calendarWrapper :global(.fc-event) {
+  background-color: rgba(24, 89, 255, 0.85) !important;
+  border-color: rgba(24, 89, 255, 0.85) !important;
+}
+
+.calendarWrapper :global(.fc-today) {
+  background-color: rgba(24, 89, 255, 0.05) !important;
+}
+.chartsSection {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+.chartContainer {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.chartContainer h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 1.5rem;
+}
+
+.chart {
+  height: 300px;
+  position: relative;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .mainContainer {
+    padding: 1rem;
+  }
+
+  .chartsSection {
+    grid-template-columns: 1fr;
+  }
+
+  .header h1 {
+    font-size: 1.75rem;
+  }
+
+  .chart {
+    height: 250px;
+  }
+
+  .calendarWrapper :global(.fc-toolbar) {
     flex-direction: column;
-    align-items: center;
-    padding: 2rem;
-    font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
-    min-height: 100vh;
+    gap: 1rem;
   }
-  
-  .title {
-    font-size: 2.5rem;
-    margin-bottom: 1.5rem;
-    color: #333;
-    text-align: center;
-  }
-  
-  .comment {
-    font-size: 1.2rem;
-    margin-bottom: 2rem;
-    color: #555;
-    text-align: center;
-    line-height: 1.6;
-    max-width: 800px;
-  }
-  
-  .chartsContainer {
+
+  .calendarWrapper :global(.fc-toolbar-chunk) {
     display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    width: 100%;
-    max-width: 1000px;
-    margin-bottom: 2rem;
+    justify-content: center;
   }
-  
-  .chartWrapper {
-    width: 45%;
-    margin-bottom: 1.5rem;
-    background: #fff;
-    padding: 1rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  .calendarWrapper {
+    height: 500px;
   }
-  
-  .chartWrapper h2 {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-    color: #444;
-  }
-  
-  .calendarContainer {
-    width: 100%;
-    max-width: 800px;
-    background: #fff;
-    padding: 1rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  .calendarContainer h2 {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-    color: #444;
-  }
-  
-  @media (max-width: 768px) {
-    .chartWrapper {
-      width: 100%;
-    }
-  
-    .chartsContainer {
-      flex-direction: column;
-      align-items: center;
-    }
-  }
-  
+}
