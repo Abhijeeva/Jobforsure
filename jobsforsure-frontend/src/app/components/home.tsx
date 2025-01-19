@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import styles from "../css/home.module.css";
+import { submitProfile } from "../services/apiService";
 
 const Home: React.FC = () => {
   const router = useRouter();
@@ -24,12 +25,19 @@ const Home: React.FC = () => {
     setLoading(true);
     setError(null);
     try {
-      //   await apiService.submitApplication(formData);
+      const response = await submitProfile(
+        resume,
+        jobDescription,
+        interviewDate
+      );
       alert("Assessment started successfully!");
-      router.push("/questions");
-    } catch (err) {
-      console.error(err);
-      setError("Failed to start assessment. Please try again.");
+      router.push(
+        `/questions?data=${encodeURIComponent(JSON.stringify(response))}`
+      );
+
+      console.log(response);
+    } catch (error) {
+      setError("Failed to submit profile. Please try again.");
     } finally {
       setLoading(false);
     }
