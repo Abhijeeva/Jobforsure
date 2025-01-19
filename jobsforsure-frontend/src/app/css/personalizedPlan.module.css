@@ -1,0 +1,76 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    min-height: 100vh;
+  }
+  
+  .title {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    color: #333;
+    text-align: center;
+  }
+  
+  .comment {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: #555;
+    text-align: center;
+    line-height: 1.6;
+    max-width: 800px;
+  }
+  
+  .chartsContainer {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 1000px;
+    margin-bottom: 2rem;
+  }
+  
+  .chartWrapper {
+    width: 45%;
+    margin-bottom: 1.5rem;
+    background: #fff;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .chartWrapper h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #444;
+  }
+  
+  .calendarContainer {
+    width: 100%;
+    max-width: 800px;
+    background: #fff;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .calendarContainer h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #444;
+  }
+  
+  @media (max-width: 768px) {
+    .chartWrapper {
+      width: 100%;
+    }
+  
+    .chartsContainer {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+  
